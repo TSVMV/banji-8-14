@@ -1,0 +1,19 @@
+{
+  "name": "class-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "班级文化展示网站 - Vue 3 + Vite",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.27"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.11"
+  }
+}
