@@ -50,7 +50,7 @@ const go = (id) => {
   >
     <div class="nav__inner">
       <a class="brand" href="#hero" @click.prevent="go('hero')">
-        <span class="brand__mark">三</span>
+        <span class="brand__mark">{{ classInfo.seal.charAt(0) }}</span>
         <span class="brand__text">
           <b>{{ classInfo.name }}</b>
           <em>{{ classInfo.school }}</em>
@@ -212,13 +212,13 @@ const go = (id) => {
 .nav__links {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: clamp(14px, 1.9vw, 26px);
 }
 
 .nav__links a {
   position: relative;
   font-size: 0.9rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--ink-soft);
   padding: 6px 2px;
   transition: color 0.3s var(--ease);

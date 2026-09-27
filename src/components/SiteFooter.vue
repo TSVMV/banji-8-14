@@ -34,6 +34,11 @@ const toTop = () => {
 
       <div class="foot__bar">
         <p class="foot__copy">© {{ new Date().getFullYear() }} {{ classInfo.name }} · {{ classInfo.school }}</p>
+
+        <p v-if="contact.developer" class="foot__dev">
+          设计与开发 <b>{{ contact.developer }}</b>
+        </p>
+
         <p class="foot__note">{{ contact.note }}</p>
 
         <nav class="foot__nav" aria-label="页脚导航">
@@ -170,6 +175,27 @@ const toTop = () => {
 
 .foot__note {
   flex: 1 1 260px;
+}
+
+/* 开发者署名 */
+.foot__dev {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 14px;
+  border: 1px solid rgba(247, 244, 237, 0.18);
+  border-radius: 40px;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+}
+
+.foot__dev b {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: 0.2em;
+  color: #d9705f;
 }
 
 .foot__nav {

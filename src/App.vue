@@ -3,9 +3,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import SiteNav from './components/SiteNav.vue'
 import HeroSection from './components/HeroSection.vue'
 import AboutSection from './components/AboutSection.vue'
+import MottoBand from './components/MottoBand.vue'
 import GallerySection from './components/GallerySection.vue'
 import TimelineSection from './components/TimelineSection.vue'
 import HonorsSection from './components/HonorsSection.vue'
+import MembersSection from './components/MembersSection.vue'
+import AboutSiteSection from './components/AboutSiteSection.vue'
 import SiteFooter from './components/SiteFooter.vue'
 
 // 顶部阅读进度
@@ -37,9 +40,12 @@ onUnmounted(() => {
     <main>
       <HeroSection />
       <AboutSection />
+      <MottoBand />
       <GallerySection />
       <TimelineSection />
       <HonorsSection />
+      <MembersSection />
+      <AboutSiteSection />
     </main>
 
     <SiteFooter />
