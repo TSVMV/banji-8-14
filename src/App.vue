@@ -6,7 +6,6 @@ import AboutSection from './components/AboutSection.vue'
 import GallerySection from './components/GallerySection.vue'
 import TimelineSection from './components/TimelineSection.vue'
 import HonorsSection from './components/HonorsSection.vue'
-import MembersSection from './components/MembersSection.vue'
 import SiteFooter from './components/SiteFooter.vue'
 
 // 顶部阅读进度
@@ -41,7 +40,6 @@ onUnmounted(() => {
       <GallerySection />
       <TimelineSection />
       <HonorsSection />
-      <MembersSection />
     </main>
 
     <SiteFooter />
