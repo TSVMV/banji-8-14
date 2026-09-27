@@ -64,7 +64,7 @@ import { timeline, timelineImage } from '../data/site.js'
 
 .tl__lead {
   font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  font-size: clamp(1.02rem, 1.9vw, 1.26rem);
   line-height: 1.9;
   color: var(--ink);
   max-width: 24ch;
@@ -175,7 +175,7 @@ import { timeline, timelineImage } from '../data/site.js'
 }
 
 .tl__title {
-  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-size: clamp(1.04rem, 1.9vw, 1.26rem);
   margin-bottom: 10px;
 }
 

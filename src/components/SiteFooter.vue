@@ -99,7 +99,7 @@ const toTop = () => {
 
 .foot__title {
   color: var(--paper);
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem);
   line-height: 1.15;
 }
 

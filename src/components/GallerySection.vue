@@ -58,11 +58,6 @@ const sizeClass = (i) => {
         <span class="en">Moments</span>
       </header>
 
-      <p class="sec-intro" v-reveal>
-        这些照片大多来自同学随手拍的手机相册，没有摆拍，却刚好留下了最好的样子。
-        点击任意照片可以放大查看。
-      </p>
-
       <div class="grid">
         <figure
           v-for="(item, i) in gallery"
@@ -130,10 +125,6 @@ const sizeClass = (i) => {
 <style scoped>
 .gallery {
   background: var(--paper);
-}
-
-.sec-intro {
-  margin-bottom: 40px;
 }
 
 /* ---- 照片墙网格 ---- */

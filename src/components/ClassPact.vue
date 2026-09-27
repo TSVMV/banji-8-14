@@ -119,7 +119,7 @@ import { classPact, classInfo } from '../data/site.js'
 
 .rules__text {
   font-family: var(--font-serif);
-  font-size: clamp(1rem, 2vw, 1.16rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
   line-height: 1.95;
   letter-spacing: 0.03em;
   color: rgba(247, 244, 237, 0.92);

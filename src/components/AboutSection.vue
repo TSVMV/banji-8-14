@@ -13,6 +13,8 @@ import { classInfo } from '../data/site.js'
 
       <div class="about__grid">
         <div class="about__aside" v-reveal>
+          <img class="about__emblem" :src="classInfo.logo" :alt="`${classInfo.emblem}班徽`" />
+          <p class="about__emblem-name">{{ classInfo.emblem }}</p>
           <p class="about__vertical">一群把日子过成故事的人</p>
           <div class="seal" aria-hidden="true">{{ classInfo.seal }}</div>
         </div>
@@ -67,8 +69,22 @@ import { classInfo } from '../data/site.js'
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 22px;
   padding-top: 6px;
+}
+
+.about__emblem {
+  width: clamp(84px, 9vw, 104px);
+  height: auto;
+}
+
+.about__emblem-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  color: var(--ink);
 }
 
 .about__vertical {
@@ -85,25 +101,25 @@ import { classInfo } from '../data/site.js'
 
 .about__para {
   color: var(--ink-soft);
-  margin-bottom: 22px;
-  font-size: 1.04rem;
-  line-height: 2.05;
+  margin-bottom: 20px;
+  font-size: 0.96rem;
+  line-height: 1.95;
 }
 
 /* 首段首字下沉，杂志感 */
 .about__para--lead {
-  font-size: 1.14rem;
+  font-size: 1.02rem;
   color: var(--ink);
 }
 
 .about__para--lead::first-letter {
   float: left;
   font-family: var(--font-serif);
-  font-size: 3.5rem;
+  font-size: 2.9rem;
   line-height: 0.86;
   font-weight: 700;
   color: var(--cinnabar);
-  margin: 6px 14px 0 0;
+  margin: 4px 12px 0 0;
 }
 
 .about__sign {
@@ -142,7 +158,7 @@ import { classInfo } from '../data/site.js'
 
 .stats__value {
   font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  font-size: clamp(1.85rem, 3.8vw, 2.6rem);
   font-weight: 700;
   line-height: 1;
   color: var(--ink);

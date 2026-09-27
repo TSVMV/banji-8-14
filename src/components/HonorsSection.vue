@@ -114,7 +114,7 @@ import { honors, honorsImage, classInfo } from '../data/site.js'
 
 .list__title {
   font-family: var(--font-serif);
-  font-size: clamp(1.02rem, 2vw, 1.2rem);
+  font-size: clamp(0.96rem, 1.6vw, 1.06rem);
   font-weight: 600;
   letter-spacing: 0.03em;
 }

@@ -96,7 +96,7 @@ import { teachers } from '../data/site.js'
 .head__word {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 2.5vw, 1.5rem);
+  font-size: clamp(0.98rem, 1.8vw, 1.2rem);
   line-height: 2.1;
   letter-spacing: 0.03em;
   color: var(--ink);

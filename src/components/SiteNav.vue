@@ -50,7 +50,7 @@ const go = (id) => {
   >
     <div class="nav__inner">
       <a class="brand" href="#hero" @click.prevent="go('hero')">
-        <span class="brand__mark">{{ classInfo.seal.charAt(0) }}</span>
+        <img class="brand__logo" :src="classInfo.logo" :alt="`${classInfo.name}班徽`" />
         <span class="brand__text">
           <b>{{ classInfo.name }}</b>
           <em>{{ classInfo.school }}</em>
@@ -120,10 +120,8 @@ const go = (id) => {
   background: linear-gradient(180deg, rgba(16, 13, 11, 0.55) 0%, rgba(16, 13, 11, 0) 100%);
 }
 
-.nav--ghost .brand__mark {
-  border-color: rgba(247, 244, 237, 0.55);
-  color: var(--paper);
-  background: rgba(247, 244, 237, 0.08);
+.nav--ghost .brand__logo {
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.45));
 }
 
 .nav--ghost .brand__text b {
@@ -168,24 +166,15 @@ const go = (id) => {
   margin-right: auto;
 }
 
-.brand__mark {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border: 1.5px solid var(--cinnabar);
-  border-radius: 5px;
-  color: var(--cinnabar);
-  background: var(--cinnabar-wash);
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 1.15rem;
-  transform: rotate(-3deg);
+.brand__logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
   transition: transform 0.5s var(--ease);
 }
 
-.brand:hover .brand__mark {
-  transform: rotate(3deg) scale(1.05);
+.brand:hover .brand__logo {
+  transform: rotate(-6deg) scale(1.06);
 }
 
 .brand__text {

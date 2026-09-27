@@ -1,22 +1,54 @@
 <script setup>
+import { computed } from 'vue'
 import { classInfo } from '../data/site.js'
+
+// 首屏照片墙：3 行，每行 6 张，左右缓慢错向漂移
+const ROWS = 3
+const PER_ROW = 6
+
+const wallRows = computed(() => {
+  const src = classInfo.heroWall
+  const rows = []
+  for (let r = 0; r < ROWS; r++) {
+    const items = []
+    for (let i = 0; i < PER_ROW; i++) {
+      // 错开取图，避免每行重复
+      items.push(src[(r * 2 + i) % src.length])
+    }
+    // 复制一份，配合 translateX(-50%) 实现无缝循环
+    rows.push([...items, ...items])
+  }
+  return rows
+})
 </script>
 
 <template>
   <section id="hero" class="hero">
-    <!-- 背景大图；未放图时用墨色宣纸底纹兜底 -->
-    <div
-      v-if="classInfo.heroImage"
-      class="hero__bg"
-      role="img"
-      :aria-label="`${classInfo.school} 校园照片`"
-    >
-      <img :src="classInfo.heroImage" alt="" aria-hidden="true" loading="eager" />
+    <!-- 照片墙背景 -->
+    <div class="wall" aria-hidden="true">
+      <div
+        v-for="(row, r) in wallRows"
+        :key="r"
+        class="wall__row"
+        :class="r % 2 === 1 ? 'wall__row--rev' : ''"
+        :style="{ '--dur': `${64 + r * 10}s` }"
+      >
+        <img
+          v-for="(src, i) in row"
+          :key="i"
+          :src="src"
+          alt=""
+          :loading="r === 0 ? 'eager' : 'lazy'"
+          decoding="async"
+        />
+      </div>
     </div>
-    <div v-else class="hero__bg hero__bg--plain" aria-hidden="true"></div>
+
     <div class="hero__veil" aria-hidden="true"></div>
 
     <div class="hero__inner">
+      <img class="hero__logo" :src="classInfo.logo" :alt="`${classInfo.name}班徽`" />
+
       <p class="hero__eyebrow">{{ classInfo.eyebrow }}</p>
 
       <h1 class="hero__title">
@@ -31,20 +63,11 @@ import { classInfo } from '../data/site.js'
       </div>
     </div>
 
-    <!-- 右侧竖排班训 -->
-    <p class="hero__vertical" aria-hidden="true">笃学 · 明辨 · 同心 · 致远</p>
-
     <!-- 朱砂印章 -->
-    <div class="hero__seal seal" aria-hidden="true">
-      {{ classInfo.seal }}
-    </div>
+    <div class="hero__seal seal" aria-hidden="true">{{ classInfo.seal }}</div>
 
     <!-- 下滑提示 -->
-    <a
-      class="hero__scroll"
-      href="#about"
-      aria-label="向下浏览班级简介"
-    >
+    <a class="hero__scroll" href="#about" aria-label="向下浏览班级简介">
       <span>向下浏览</span>
       <i aria-hidden="true"></i>
     </a>
@@ -57,50 +80,46 @@ import { classInfo } from '../data/site.js'
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 120px var(--gutter) 96px;
+  padding: 108px var(--gutter) 88px;
   overflow: hidden;
   color: var(--paper);
+  background: #14110e;
   z-index: 1;
 }
 
-.hero__bg {
+/* ---------- 照片墙 ---------- */
+.wall {
   position: absolute;
   inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   z-index: -2;
 }
 
-.hero__bg img {
-  width: 100%;
+.wall__row {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  animation: wallSlide var(--dur) linear infinite;
+}
+
+.wall__row--rev {
+  animation-direction: reverse;
+}
+
+.wall__row img {
+  width: clamp(180px, 20vw, 300px);
   height: 100%;
   object-fit: cover;
-  object-position: center 42%;
-  animation: heroZoom 16s var(--ease) forwards;
+  flex: none;
+  filter: saturate(0.82) contrast(1.02);
 }
 
-/* 未放首屏照片时的兜底底纹：墨色宣纸 + 两团晕染 */
-.hero__bg--plain {
-  background:
-    radial-gradient(ellipse 68% 54% at 20% 26%, rgba(168, 132, 63, 0.3), transparent 62%),
-    radial-gradient(ellipse 58% 48% at 84% 74%, rgba(178, 58, 46, 0.22), transparent 60%),
-    linear-gradient(158deg, #262219 0%, #14110e 52%, #1e1a16 100%);
-}
-
-.hero__bg--plain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.75;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(247, 244, 237, 0.035) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(247, 244, 237, 0.022) 0 1px, transparent 1px 5px);
-}
-
-@keyframes heroZoom {
-  from {
-    transform: scale(1.09);
-  }
+@keyframes wallSlide {
   to {
-    transform: scale(1);
+    transform: translateX(-50%);
   }
 }
 
@@ -110,10 +129,11 @@ import { classInfo } from '../data/site.js'
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(20, 17, 14, 0.62) 0%, rgba(20, 17, 14, 0.28) 42%, rgba(20, 17, 14, 0.82) 100%),
-    linear-gradient(90deg, rgba(20, 17, 14, 0.72) 0%, rgba(20, 17, 14, 0.12) 68%);
+    radial-gradient(ellipse 76% 68% at 26% 48%, rgba(16, 13, 11, 0.9), rgba(16, 13, 11, 0.42) 68%),
+    linear-gradient(180deg, rgba(16, 13, 11, 0.78) 0%, rgba(16, 13, 11, 0.3) 40%, rgba(16, 13, 11, 0.86) 100%);
 }
 
+/* ---------- 文字 ---------- */
 .hero__inner {
   max-width: var(--maxw);
   width: 100%;
@@ -121,23 +141,31 @@ import { classInfo } from '../data/site.js'
   position: relative;
 }
 
-.hero__eyebrow {
-  font-size: 0.78rem;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: rgba(247, 244, 237, 0.78);
-  margin-bottom: 22px;
+.hero__logo {
+  width: clamp(58px, 6.4vw, 82px);
+  height: auto;
+  margin-bottom: 20px;
   opacity: 0;
-  animation: rise 0.9s var(--ease) 0.15s forwards;
+  animation: rise 0.9s var(--ease) 0.1s forwards;
+  filter: drop-shadow(0 6px 22px rgba(0, 0, 0, 0.5));
+}
+
+.hero__eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.36em;
+  color: rgba(247, 244, 237, 0.76);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.18s forwards;
 }
 
 .hero__title {
-  font-size: clamp(3.4rem, 11vw, 8.6rem);
-  line-height: 1;
+  font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+  line-height: 1.06;
   letter-spacing: 0.04em;
   font-weight: 700;
   color: var(--paper);
-  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
   opacity: 0;
   animation: rise 1s var(--ease) 0.3s forwards;
 }
@@ -151,9 +179,9 @@ import { classInfo } from '../data/site.js'
 .hero__title span::after {
   content: "";
   position: absolute;
-  left: 4%;
-  right: 6%;
-  bottom: -0.12em;
+  left: 3%;
+  right: 5%;
+  bottom: -0.14em;
   height: 3px;
   background: var(--cinnabar);
   transform: scaleX(0);
@@ -168,49 +196,34 @@ import { classInfo } from '../data/site.js'
 }
 
 .hero__slogan {
-  margin-top: 30px;
+  margin-top: 24px;
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
-  letter-spacing: 0.16em;
-  color: rgba(247, 244, 237, 0.94);
+  font-size: clamp(0.92rem, 1.7vw, 1.16rem);
+  letter-spacing: 0.14em;
+  color: rgba(247, 244, 237, 0.92);
   opacity: 0;
   animation: rise 0.9s var(--ease) 0.5s forwards;
 }
 
 .hero__meta {
-  margin-top: 34px;
+  margin-top: 26px;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   opacity: 0;
   animation: rise 0.9s var(--ease) 0.68s forwards;
 }
 
 .hero__rule {
-  width: 54px;
+  width: 46px;
   height: 1px;
   background: rgba(247, 244, 237, 0.5);
 }
 
 .hero__motto {
-  font-size: 0.82rem;
-  letter-spacing: 0.32em;
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
   color: rgba(247, 244, 237, 0.72);
-}
-
-/* 竖排班训 */
-.hero__vertical {
-  position: absolute;
-  top: 50%;
-  right: clamp(14px, 3vw, 40px);
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  letter-spacing: 0.5em;
-  color: rgba(247, 244, 237, 0.6);
-  opacity: 0;
-  animation: fadeIn 1.2s var(--ease) 1.1s forwards;
 }
 
 .hero__seal {
@@ -227,20 +240,20 @@ import { classInfo } from '../data/site.js'
 .hero__scroll {
   position: absolute;
   left: var(--gutter);
-  bottom: 26px;
+  bottom: 22px;
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: 0.68rem;
-  letter-spacing: 0.3em;
-  color: rgba(247, 244, 237, 0.7);
+  font-size: 0.64rem;
+  letter-spacing: 0.28em;
+  color: rgba(247, 244, 237, 0.68);
   opacity: 0;
   animation: fadeIn 1s var(--ease) 1.35s forwards;
 }
 
 .hero__scroll i {
   width: 1px;
-  height: 40px;
+  height: 36px;
   background: linear-gradient(180deg, rgba(247, 244, 237, 0.7), transparent);
   position: relative;
   overflow: hidden;
@@ -250,9 +263,9 @@ import { classInfo } from '../data/site.js'
   content: "";
   position: absolute;
   left: 0;
-  top: -40px;
+  top: -36px;
   width: 1px;
-  height: 40px;
+  height: 36px;
   background: var(--cinnabar);
   animation: scrollDot 2.2s var(--ease) infinite;
 }
@@ -262,7 +275,7 @@ import { classInfo } from '../data/site.js'
     transform: translateY(0);
   }
   100% {
-    transform: translateY(80px);
+    transform: translateY(72px);
   }
 }
 
@@ -279,13 +292,20 @@ import { classInfo } from '../data/site.js'
   }
 }
 
-@media (max-width: 720px) {
-  .hero__vertical {
-    display: none;
+/* 尊重「减少动态」偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .wall__row {
+    animation: none;
   }
+}
+
+@media (max-width: 720px) {
   .hero__seal {
-    top: 96px;
+    top: 92px;
     bottom: auto;
+  }
+  .wall__row img {
+    width: 150px;
   }
 }
 </style>

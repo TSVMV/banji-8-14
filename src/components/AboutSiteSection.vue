@@ -52,7 +52,7 @@ import { aboutSite } from '../data/site.js'
 }
 
 .aboutsite__lead h2 {
-  font-size: clamp(1.7rem, 3.6vw, 2.55rem);
+  font-size: clamp(1.34rem, 2.7vw, 1.9rem);
   margin: 14px 0 24px;
 }
 

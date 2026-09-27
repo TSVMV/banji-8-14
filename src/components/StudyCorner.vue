@@ -127,7 +127,7 @@ import { studyMethods, bookList } from '../data/site.js'
 
 .books__head h3 {
   font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: clamp(1.02rem, 1.9vw, 1.24rem);
   letter-spacing: 0.06em;
 }
 

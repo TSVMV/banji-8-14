@@ -74,7 +74,7 @@ import { classInfo } from '../data/site.js'
 
 .band__slogan {
   font-family: var(--font-serif);
-  font-size: clamp(1.55rem, 4.6vw, 3.5rem);
+  font-size: clamp(1.28rem, 3vw, 2.2rem);
   line-height: 1.55;
   letter-spacing: clamp(0.06em, 1vw, 0.2em);
   color: var(--paper);

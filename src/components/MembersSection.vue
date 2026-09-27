@@ -15,18 +15,21 @@ import { members } from '../data/site.js'
         一个班能转起来，从来不是靠一个人。下面是这一届班委和各科课代表。
       </p>
 
-      <ol class="roster">
+      <ul class="roster">
         <li
           v-for="(m, i) in members"
-          :key="`${m.name}-${m.role}`"
+          :key="m.role"
           class="roster__item"
-          v-reveal="(i % 4) * 70"
+          v-reveal="(i % 4) * 60"
         >
-          <span class="roster__idx" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
-          <span class="roster__name">{{ m.name }}</span>
           <span class="roster__role">{{ m.role }}</span>
+          <p class="roster__names">
+            <span v-for="(n, j) in m.names" :key="n" class="roster__name"
+              >{{ n }}<i v-if="j < m.names.length - 1" class="roster__dot" aria-hidden="true">·</i></span
+            >
+          </p>
         </li>
-      </ol>
+      </ul>
     </div>
   </section>
 </template>
@@ -37,76 +40,75 @@ import { members } from '../data/site.js'
 }
 
 .sec-intro {
-  margin-bottom: clamp(30px, 4vw, 48px);
+  margin-bottom: clamp(28px, 4vw, 44px);
 }
 
-/* 名单：编辑式的双栏/多栏列表，靠发丝线分隔，不用卡片 */
 .roster {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
-  column-gap: clamp(26px, 4vw, 60px);
-  border-top: 1px solid var(--line);
+  grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+  gap: 1px;
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft);
 }
 
 .roster__item {
   position: relative;
+  background: var(--paper-card);
+  padding: 20px 22px 22px;
   display: flex;
-  align-items: baseline;
-  gap: 14px;
-  padding: 19px 2px;
-  border-bottom: 1px solid var(--line-soft);
-  transition: padding-left 0.5s var(--ease);
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.45s var(--ease);
 }
 
-/* 悬停时左侧浮起一道朱砂短线 */
+/* 悬停时左上浮起一道朱砂短线 */
 .roster__item::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 6px;
-  bottom: 6px;
+  top: 0;
   width: 2px;
+  height: 0;
   background: var(--cinnabar);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.5s var(--ease);
+  transition: height 0.55s var(--ease);
 }
 
 .roster__item:hover {
-  padding-left: 16px;
+  background: var(--paper);
 }
 
 .roster__item:hover::before {
-  transform: scaleY(1);
-}
-
-.roster__idx {
-  flex: none;
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
-  color: var(--cinnabar);
-  opacity: 0.75;
-}
-
-.roster__name {
-  font-family: var(--font-serif);
-  font-size: 1.14rem;
-  letter-spacing: 0.08em;
-  transition: color 0.4s var(--ease);
-}
-
-.roster__item:hover .roster__name {
-  color: var(--cinnabar-deep);
+  height: 100%;
 }
 
 .roster__role {
-  margin-left: auto;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  color: var(--ink-mute);
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  color: var(--cinnabar);
+}
+
+.roster__names {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 0;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+}
+
+.roster__name {
   white-space: nowrap;
+}
+
+.roster__dot {
+  margin: 0 8px;
+  font-style: normal;
+  color: var(--line);
 }
 </style>
