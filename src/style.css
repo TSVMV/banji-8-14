@@ -15,6 +15,8 @@
   --cinnabar: #b23a2e;
   --cinnabar-deep: #8e2a21;
   --cinnabar-wash: rgba(178, 58, 46, 0.08);
+  /* 深色底上用的提亮朱砂（保证对比度达标） */
+  --cinnabar-on-dark: #d9705f;
 
   /* 金 / 分隔 */
   --gold: #a8843f;

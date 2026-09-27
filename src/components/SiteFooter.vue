@@ -93,7 +93,7 @@ const toTop = () => {
 .foot__kicker {
   font-size: 0.74rem;
   letter-spacing: 0.34em;
-  color: var(--cinnabar);
+  color: var(--cinnabar-on-dark);
   margin-bottom: 16px;
 }
 

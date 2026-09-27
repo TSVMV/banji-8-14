@@ -42,9 +42,9 @@ const onKey = (e) => {
 onMounted(() => window.addEventListener('keydown', onKey))
 onUnmounted(() => window.removeEventListener('keydown', onKey))
 
-/* 让照片墙错落有致：桌面端给部分格子加大 */
+/* 让照片墙错落有致：6 张刚好铺满三栏，不留空洞 */
 const sizeClass = (i) => {
-  const map = ['card--wide', 'card--tall', '', 'card--wide', '', 'card--tall']
+  const map = ['card--wide', '', 'card--tall', 'card--wide', '', '']
   return map[i % map.length]
 }
 </script>
@@ -141,6 +141,8 @@ const sizeClass = (i) => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 210px;
+  /* dense：照片数量变化时自动回填空位，避免出现大块空洞 */
+  grid-auto-flow: dense;
   gap: 14px;
 }
 
@@ -277,7 +279,7 @@ const sizeClass = (i) => {
   font-family: var(--font-sans);
   font-size: 0.7rem;
   letter-spacing: 0.24em;
-  color: var(--cinnabar);
+  color: var(--cinnabar-on-dark);
 }
 
 .lb__close {

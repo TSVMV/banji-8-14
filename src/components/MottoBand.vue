@@ -67,7 +67,7 @@ import { classInfo } from '../data/site.js'
 .band__label {
   font-size: 0.7rem;
   letter-spacing: 0.52em;
-  color: var(--cinnabar);
+  color: var(--cinnabar-on-dark);
   margin-bottom: clamp(22px, 4vw, 38px);
   text-indent: 0.52em;
 }
