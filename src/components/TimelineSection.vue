@@ -6,7 +6,7 @@ import { timeline, timelineImage } from '../data/site.js'
   <section id="timeline" class="section timeline">
     <div class="wrap">
       <header class="sec-head" v-reveal>
-        <span class="index">03 / 纪事</span>
+        <span class="index">04 / 纪事</span>
         <h2>班级大事记</h2>
         <span class="en">Chronicle</span>
       </header>

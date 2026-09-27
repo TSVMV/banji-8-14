@@ -6,7 +6,7 @@ import { honors, honorsImage, classInfo } from '../data/site.js'
   <section id="honors" class="section honors">
     <div class="wrap">
       <header class="sec-head" v-reveal>
-        <span class="index">04 / 荣誉</span>
+        <span class="index">06 / 荣誉</span>
         <h2>荣誉墙</h2>
         <span class="en">Honours</span>
       </header>

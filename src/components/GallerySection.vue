@@ -53,7 +53,7 @@ const sizeClass = (i) => {
   <section id="gallery" class="section gallery">
     <div class="wrap">
       <header class="sec-head" v-reveal>
-        <span class="index">02 / 风采</span>
+        <span class="index">03 / 风采</span>
         <h2>班级风采</h2>
         <span class="en">Moments</span>
       </header>

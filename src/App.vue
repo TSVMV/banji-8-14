@@ -4,10 +4,14 @@ import SiteNav from './components/SiteNav.vue'
 import HeroSection from './components/HeroSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import MottoBand from './components/MottoBand.vue'
+import TeacherWords from './components/TeacherWords.vue'
 import GallerySection from './components/GallerySection.vue'
 import TimelineSection from './components/TimelineSection.vue'
+import ClassPact from './components/ClassPact.vue'
 import HonorsSection from './components/HonorsSection.vue'
+import StudyCorner from './components/StudyCorner.vue'
 import MembersSection from './components/MembersSection.vue'
+import VoicesWall from './components/VoicesWall.vue'
 import AboutSiteSection from './components/AboutSiteSection.vue'
 import SiteFooter from './components/SiteFooter.vue'
 
@@ -41,10 +45,14 @@ onUnmounted(() => {
       <HeroSection />
       <AboutSection />
       <MottoBand />
+      <TeacherWords />
       <GallerySection />
       <TimelineSection />
+      <ClassPact />
       <HonorsSection />
+      <StudyCorner />
       <MembersSection />
+      <VoicesWall />
       <AboutSiteSection />
     </main>
 

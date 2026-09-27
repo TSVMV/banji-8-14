@@ -6,7 +6,7 @@ import { aboutSite } from '../data/site.js'
   <section id="about-site" class="section aboutsite">
     <div class="wrap aboutsite__grid">
       <div class="aboutsite__lead" v-reveal>
-        <span class="kicker">06 / 关于</span>
+        <span class="kicker">10 / 关于</span>
         <h2>{{ aboutSite.title }}</h2>
         <p v-for="(p, i) in aboutSite.paragraphs" :key="i">{{ p }}</p>
 

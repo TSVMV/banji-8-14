@@ -6,7 +6,7 @@ import { members } from '../data/site.js'
   <section id="members" class="section members">
     <div class="wrap">
       <header class="sec-head" v-reveal>
-        <span class="index">05 / 班委</span>
+        <span class="index">08 / 班委</span>
         <h2>班委成员</h2>
         <span class="en">Committee</span>
       </header>

@@ -1,5 +1,5 @@
 <script setup>
-import { contact, classInfo, navItems } from '../data/site.js'
+import { contact, classInfo, footerNav } from '../data/site.js'
 
 const toTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -43,7 +43,7 @@ const toTop = () => {
 
         <nav class="foot__nav" aria-label="页脚导航">
           <a
-            v-for="item in navItems"
+            v-for="item in footerNav"
             :key="item.id"
             :href="`#${item.id}`"
           >{{ item.label }}</a>
@@ -200,7 +200,8 @@ const toTop = () => {
 
 .foot__nav {
   display: flex;
-  gap: 18px;
+  flex-wrap: wrap;
+  gap: 10px 18px;
 }
 
 .foot__nav a {
